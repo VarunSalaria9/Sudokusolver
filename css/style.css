@@ -1,0 +1,206 @@
+
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+    
+    
+    background: #111; 
+    
+    position: relative;
+}
+
+.nebula-swirl {
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 50% 50%, 
+        #8a2be2 0%, 
+        #ff1493 25%,
+        #00ffff 50%,
+        #ff8c00 75%,
+        #111 100%
+    );
+    z-index: -1;
+    animation: nebula-rotate 30s linear infinite; 
+    filter: blur(100px);
+}
+
+@keyframes nebula-rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin-bottom: 25px;
+    
+    text-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.8),
+        0 0 30px #ff00ff,
+        0 0 60px #00ffff,
+        0 0 100px #ff00ff;
+    animation: heading-shimmer 4s infinite alternate, glowPulse 2s infinite alternate;
+}
+
+@keyframes glowPulse {
+    from { letter-spacing: 5px; opacity: 0.9; }
+    to { letter-spacing: 7px; opacity: 1; }
+}
+
+
+@keyframes heading-shimmer {
+    0% { color: #fff; }
+    50% { color: #ffeb3b; }
+    100% { color: #fff; }
+}
+
+#sudoku-container {
+    margin: 20px;
+    background: rgba(255, 255, 255, 0.95); 
+    padding: 18px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 50px rgba(106, 17, 203, 0.5); 
+    position: relative;
+    z-index: 10; 
+}
+
+#sudoku-grid {
+    border-collapse: collapse;
+    border: 4px solid #333;
+}
+
+#sudoku-grid input {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    text-align: center;
+    border: 1px solid #ccc;
+    outline: none;
+    background-color: #fefefe;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+#sudoku-grid input:focus {
+    background-color: #e0f7fa;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 188, 212, 0.8);
+}
+
+#sudoku-grid tr:nth-child(3n) td input {
+    border-bottom: 3px solid #333;
+}
+
+#sudoku-grid td:nth-child(3n) input {
+    border-right: 3px solid #333;
+}
+#sudoku-grid tr:last-child input {
+    border-bottom: 1px solid #ccc; 
+}
+#sudoku-grid tr:nth-child(9) td input {
+    border-bottom: 1px solid #ccc;
+}
+#sudoku-grid tr:nth-child(9) td:nth-child(3n) input {
+    border-bottom: 3px solid #333;
+}
+
+#sudoku-grid tr:first-child input {
+    border-top: 1px solid #ccc;
+}
+
+#sudoku-grid tr td:first-child input {
+    border-left: 1px solid #ccc;
+}
+#sudoku-grid {
+    border-collapse: collapse;
+    border-width: 4px;
+    border-style: solid;
+    border-color: #333; 
+}
+
+#buttons {
+    margin-top: 25px;
+    display: flex;
+    gap: 15px;
+    z-index: 10; 
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    border-radius: 50px; /* Pill shape */
+    color: white;
+    background: linear-gradient(45deg, #ff6b6b, #ffc93c, #6b6bff); 
+    background-size: 200% auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, background-position 0.5s ease;
+}
+
+button:hover {
+    transform: translateY(-5px) scale(1.05); 
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 107, 107, 0.7);
+    background-position: right center;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+}
+
+.shake {
+    animation: shake 0.3s ease-in-out;
+    border-color: #ff4081 !important; 
+    box-shadow: 0 0 10px #ff4081;
+}
+
+.cursor-follower {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    pointer-events: none; 
+    background: radial-gradient(circle, #fffd75 10%, #ff00ff 30%, #00ffff 60%, transparent 100%);
+    box-shadow: 
+        0 0 15px #ff00ff, 
+        0 0 30px #00ffff, 
+        0 0 50px #ff00ff;
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform 0.15s ease-out; 
+    z-index: 10000;
+    animation: pulse-orb 1.5s infinite alternate;
+}
+
+@keyframes pulse-orb {
+    from { transform: translate(-50%, -50%) scale(1); opacity: 0.9; }
+    to { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
+}
+
+.user-entered {
+    color: #4a148c; 
+    font-weight: bold;
+}
+
+.solved-number {
+    color: #00796b; 
+    font-weight: bold;
+    animation: solved-pop 0.6s ease-in-out;
+}
